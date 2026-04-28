@@ -1,0 +1,162 @@
+/* ── MindQuest Theme Variables ── */
+/* Smooth transitions when theme switches */
+*, *::before, *::after {
+  transition: background-color 0.4s ease, border-color 0.4s ease,
+              color 0.3s ease, box-shadow 0.4s ease;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ── Custom Premium Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent, #a855f7);
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  scroll-behavior: smooth;
+}
+
+/* ── DARK (default) ── */
+:root,
+:root[data-theme="dark"] {
+  --bg:           #0d0d0d;
+  --bg-gradient:  radial-gradient(ellipse 80% 50% at 50% 0%, rgba(98,0,234,0.12) 0%, transparent 70%);
+  --surface:      rgba(255,255,255,0.04);
+  --surface-hover:rgba(255,255,255,0.08);
+  --border:       rgba(255,255,255,0.08);
+  --text:         #ffffff;
+  --text-muted:   #94a3b8;
+  --accent:       #a855f7;
+  --accent-dark:  #7e22ce;
+  --accent-glow:  rgba(168,85,247,0.50);
+  --accent2:      #00e5be;
+  --accent2-glow: rgba(0,229,190,0.40);
+  --card-bg:      rgba(255,255,255,0.03);
+  --navbar-bg:    rgba(13,13,13,0.88);
+}
+
+/* ── LIGHT ── */
+:root[data-theme="light"] {
+  --bg:           #f2eeff;
+  --bg-gradient:  radial-gradient(ellipse 80% 50% at 50% 0%, rgba(168,85,247,0.12) 0%, transparent 70%);
+  --surface:      rgba(0,0,0,0.05);
+  --surface-hover:rgba(0,0,0,0.09);
+  --border:       rgba(0,0,0,0.10);
+  --text:         #0f0f1a;
+  --text-muted:   #6b5f80;
+  --accent:       #7c3aed;
+  --accent-dark:  #6d28d9;
+  --accent-glow:  rgba(124,58,237,0.35);
+  --accent2:      #00b894;
+  --accent2-glow: rgba(0,184,148,0.35);
+  --card-bg:      rgba(255,255,255,0.65);
+  --navbar-bg:    rgba(242,238,255,0.90);
+}
+
+/* ── NEON ── */
+:root[data-theme="neon"] {
+  --bg:           #06060f;
+  --bg-gradient:  radial-gradient(ellipse 80% 50% at 50% 0%, rgba(140,0,255,0.20) 0%, transparent 70%);
+  --surface:      rgba(168,85,247,0.06);
+  --surface-hover:rgba(168,85,247,0.12);
+  --border:       rgba(168,85,247,0.22);
+  --text:         #f0e8ff;
+  --text-muted:   #a98ac8;
+  --accent:       #c060ff;
+  --accent-dark:  #9b33ea;
+  --accent-glow:  rgba(192,96,255,0.70);
+  --accent2:      #00ffcc;
+  --accent2-glow: rgba(0,255,204,0.60);
+  --card-bg:      rgba(140,0,255,0.05);
+  --navbar-bg:    rgba(6,6,15,0.92);
+}
+
+/* ── PREMIUM ANIMATIONS ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 10px var(--accent-glow)); }
+  50% { filter: drop-shadow(0 0 25px var(--accent-glow)); }
+}
+
+@keyframes mesh-drift {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05) translate(5px, 5px); }
+}
+
+/* ── REUSABLE UI TOKENS ── */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px var(--accent-glow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px var(--accent-glow);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+}

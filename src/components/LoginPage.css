@@ -1,0 +1,484 @@
+/* ═══════════════════════════════════════════
+   LoginPage.css  — matches MindQuest theme
+   ═══════════════════════════════════════════ */
+
+/* ── Page container ── */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg, #0d0d0d);
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15), transparent 70%),
+    radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.10), transparent 70%),
+    var(--bg-gradient,
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(98,0,234,0.12) 0%, transparent 70%));
+  color: var(--text, #ffffff);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient orbs: shared with HomePage */
+.login-page .ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.6;
+  animation: floatOrb 10s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.login-page .ambient-orb-1 {
+  width: 450px; height: 450px;
+  background: rgba(168,85,247,0.15);
+  top: -120px; left: -150px;
+}
+.login-page .ambient-orb-2 {
+  width: 350px; height: 350px;
+  background: rgba(56,189,248,0.12);
+  bottom: 10%; right: -100px;
+  animation-delay: -3s; animation-duration: 12s;
+}
+.login-page .ambient-orb-3 {
+  width: 300px; height: 300px;
+  background: rgba(239,68,68,0.09);
+  top: 40%; left: 25%;
+  transform: translate(-50%,-50%);
+  animation-delay: -6s; animation-duration: 15s;
+}
+@keyframes floatOrb {
+  0%   { transform: translateY(0)    scale(1); }
+  100% { transform: translateY(60px) scale(1.15); }
+}
+
+/* ── Card ── */
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  background: var(--card-bg, rgba(255,255,255,0.03));
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(168,85,247,0.22);
+  border-radius: 28px;
+  padding: 48px 40px 44px;
+  box-shadow:
+    0 0 40px rgba(139, 92, 246, 0.15),
+    0 24px 80px rgba(0,0,0,0.45),
+    inset 0 0 20px rgba(255,255,255,0.03);
+  /* Entry animation first, then float loop */
+  animation:
+    loginCardIn 0.7s cubic-bezier(0.23,1,0.32,1) forwards,
+    floatCard 5s ease-in-out 0.7s infinite;
+  transition: box-shadow 0.3s ease;
+}
+.login-card:hover {
+  box-shadow:
+    0 0 60px rgba(139, 92, 246, 0.28),
+    0 32px 90px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(255,255,255,0.04);
+}
+@keyframes loginCardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes floatCard {
+  0%   { transform: translateY(0px);  }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px);  }
+}
+
+/* ── Logo block ── */
+.login-logo {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.login-logo-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 18px rgba(168,85,247,0.65));
+  animation: floatIcon 3s ease-in-out infinite alternate;
+}
+@keyframes floatIcon {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-7px); }
+}
+.login-title {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-weight: 800;
+  margin: 0 0 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(168,85,247,0.4));
+  animation: titleGlowPulse 3s ease-in-out infinite alternate;
+}
+@keyframes titleGlowPulse {
+  from { filter: drop-shadow(0 0 12px rgba(168,85,247,0.35)); }
+  to   { filter: drop-shadow(0 0 28px rgba(168,85,247,0.75)); }
+}
+.login-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted, #94a3b8);
+  font-weight: 500;
+}
+
+/* ── Form ── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+}
+
+/* ── Input ── */
+.login-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.login-input-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+.login-input {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid var(--border, rgba(255,255,255,0.10));
+  border-radius: 14px;
+  color: var(--text, #ffffff);
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease,
+              background 0.3s ease, transform 0.25s ease;
+}
+.login-input::placeholder { color: #555; }
+.login-input:focus {
+  border-color: var(--accent, #a855f7);
+  background: rgba(168,85,247,0.09);
+  box-shadow:
+    0 0 0 3px rgba(168,85,247,0.20),
+    0 0 12px rgba(168,85,247,0.6);
+  transform: scale(1.02);
+}
+
+/* ── Avatar grid ── */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.avatar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 6px 10px;
+  background: var(--surface, rgba(255,255,255,0.04));
+  border: 1.5px solid var(--border, rgba(255,255,255,0.08));
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.23,1,0.32,1);
+  color: var(--text-muted, #94a3b8);
+  font-family: inherit;
+}
+.avatar-card:hover {
+  background: rgba(236, 72, 153, 0.07);
+  border-color: rgba(236, 72, 153, 0.3);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  color: var(--text, #fff);
+}
+.avatar-card--selected {
+  background: rgba(236, 72, 153, 0.15);
+  border: 2px solid #ec4899;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+  transform: translateY(-3px) scale(1.12);
+  color: var(--text, #fff);
+  animation: avatarSelectedPulse 2s ease-in-out infinite alternate;
+}
+@keyframes avatarSelectedPulse {
+  from { box-shadow: 0 0 12px rgba(236, 72, 153, 0.45); }
+  to   { box-shadow: 0 0 28px rgba(236, 72, 153, 0.85); }
+}
+.avatar-emoji {
+  font-size: 1.85rem;
+  display: block;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+.avatar-card--selected .avatar-emoji {
+  filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.9));
+  transform: scale(1.12);
+}
+/* Pink glow on hover for unselected */
+.avatar-card:hover:not(.avatar-card--selected) .avatar-emoji {
+  filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.5));
+}
+.avatar-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* ── Error ── */
+.login-error {
+  font-size: 0.85rem;
+  color: #f87171;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px 16px;
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.22);
+  border-radius: 10px;
+  animation: slideUpFade 0.2s ease;
+}
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── Submit button ── */
+.login-submit {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(270deg, #a855f7, #6366f1, #ec4899, #a855f7);
+  background-size: 400% 400%;
+  /* Only gradientShift animates background-position — no box-shadow conflict */
+  animation: gradientShift 6s ease infinite, buttonBreathe 3s ease-in-out infinite;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  /* Only transition transform — removes box-shadow conflict with animation */
+  transition: transform 0.25s ease;
+  box-shadow:
+    0 0 12px rgba(168, 85, 247, 0.4),
+    0 4px 22px rgba(168, 85, 247, 0.3),
+    0 0 10px rgba(168, 85, 247, 0.2) inset;
+  margin-top: 4px;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+/* Safe: animates filter only — no conflict with transition or box-shadow */
+@keyframes buttonBreathe {
+  0%   { filter: brightness(1);    }
+  50%  { filter: brightness(1.18); }
+  100% { filter: brightness(1);    }
+}
+.login-submit:hover:not(:disabled) {
+  transform: scale(1.05);
+  filter: brightness(1.25) !important;
+}
+.login-submit:active:not(:disabled) {
+  transform: scale(0.95);
+  transition-duration: 0.07s;
+}
+.login-submit:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  animation: none;
+  filter: none;
+}
+
+.login-submit-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.login-spinner {
+  width: 18px; height: 18px;
+  border: 2.5px solid rgba(255,255,255,0.30);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .login-card { padding: 36px 20px 32px; }
+  .avatar-grid { gap: 8px; }
+  .avatar-card { padding: 10px 4px 8px; }
+  .avatar-emoji { font-size: 1.5rem; }
+  .avatar-label { font-size: 0.6rem; }
+}
+
+/* ── Cinematic Entry Overlay ── */
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlayFadeIn 0.3s ease forwards;
+}
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.login-overlay-content {
+  text-align: center;
+  animation: slideUpFade 0.5s ease 0.2s both;
+}
+
+.login-overlay-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: pulseIcon 1s ease infinite alternate;
+}
+@keyframes pulseIcon {
+  from { transform: scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5)); }
+  to { transform: scale(1.1); filter: drop-shadow(0 0 25px rgba(168, 85, 247, 1)); }
+}
+
+.login-overlay-title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.login-overlay-sub {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+
+.login-progress-track {
+  width: 100%;
+  max-width: 300px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.login-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #a855f7);
+  border-radius: 3px;
+  width: 0%;
+  animation: fillProgress 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes fillProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* ── Avatar Cinematic Styles ── */
+.avatar-subtitle {
+  font-size: 0.75rem;
+  color: #a855f7;
+  text-align: center;
+  margin-top: 12px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.avatar-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Removed duplicate — primary .avatar-card--selected defined above */
+
+/* ── Input Cinematic Styles ── */
+.login-input-wrap::after {
+  content: '|';
+  position: absolute;
+  right: 15px;
+  color: #a855f7;
+  font-weight: 900;
+  font-size: 1.2rem;
+  animation: blinkCaret 1s step-end infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+.login-input-wrap:focus-within::after {
+  opacity: 1;
+}
+@keyframes blinkCaret {
+  50% { opacity: 0; }
+}
+
+/* ── Particles ── */
+.login-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(168, 85, 247, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 1);
+  pointer-events: none;
+  animation: floatParticle linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatParticle {
+  from { transform: translateY(100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Dynamically generate some particle positions via nth-child roughly */
+.login-particle:nth-child(even) { background: rgba(56, 189, 248, 0.8); box-shadow: 0 0 10px rgba(56, 189, 248, 1); }
+.login-particle-1 { left: 27%; animation-duration: 7s; animation-delay: 1.5s; }
+.login-particle-2 { left: 54%; animation-duration: 9s; animation-delay: 3.0s; }
+.login-particle-3 { left: 81%; animation-duration: 11s; animation-delay: 4.5s; }
+.login-particle-4 { left: 8%; animation-duration: 13s; animation-delay: 6.0s; }
+.login-particle-5 { left: 35%; animation-duration: 5s; animation-delay: 7.5s; }
+.login-particle-6 { left: 62%; animation-duration: 7s; animation-delay: 9.0s; }
+.login-particle-7 { left: 89%; animation-duration: 9s; animation-delay: 0.0s; }
+.login-particle-8 { left: 16%; animation-duration: 11s; animation-delay: 1.5s; }
+.login-particle-9 { left: 43%; animation-duration: 13s; animation-delay: 3.0s; }
+.login-particle-10 { left: 70%; animation-duration: 5s; animation-delay: 4.5s; }
+.login-particle-11 { left: 97%; animation-duration: 7s; animation-delay: 6.0s; }
+.login-particle-12 { left: 24%; animation-duration: 9s; animation-delay: 7.5s; }
+.login-particle-13 { left: 51%; animation-duration: 11s; animation-delay: 9.0s; }
+.login-particle-14 { left: 78%; animation-duration: 13s; animation-delay: 0.0s; }
+.login-particle-15 { left: 5%; animation-duration: 5s; animation-delay: 1.5s; }
